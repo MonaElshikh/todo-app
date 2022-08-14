@@ -1,0 +1,29 @@
+@media (min-width:1440px) {
+    .to-do-app{
+    background: url("/images/bg-desktop-light.jpg") no-repeat !important;
+    }
+    .to-do-app.dark {
+        background: url("/images/bg-desktop-dark.jpg") no-repeat !important;
+    }
+    header {
+        justify-content: flex-start ;
+    }
+    header > h1 {
+        left: 31%;
+    }
+    header > img {
+        left:56%
+    }
+    .content  {
+        width: 35%;
+    }
+    .tasks {
+        height: 450px;
+    }
+    .task , .info {
+        padding: 25px 20px;
+    }
+    p {
+        margin: 30px 0;
+    }
+}

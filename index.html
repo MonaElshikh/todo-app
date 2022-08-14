@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="To Do App | Mona Elshikh" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link
+      rel="preload"
+      as="style"
+      href="css/media.css"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="images/favicon-32x32.png"
+    />
+    <title>To Do App | Mona Elshikh</title>
+  </head>
+  <body>
+    <div class="container" role="main">
+      <div class="to-do-app">
+        <header>
+          <h1>Todo</h1>
+          <img alt="light mode" data-theme="" />
+        </header>
+        <div class="content">
+          <div class="task-content">
+            <input
+              type="text"
+              id="txtadd"
+              placeholder="create a new todo and press enter ..."
+            />
+          </div>
+          <div class="tasks empty"></div>
+          <div class="info">
+            <h2>5 items left</h2>
+            <a href="#">Clear Completed</a>
+          </div>
+          <div class="actions">
+            <ul>
+              <li><a class="active">All</a></li>
+              <li><a>Active</a></li>
+              <li><a>Completed</a></li>
+            </ul>
+          </div>
+          <p>Drag and drop to reorder list</p>
+        </div>
+      </div>
+    </div>
+    <script src="js/main.js"></script>
+  </body>
+</html>

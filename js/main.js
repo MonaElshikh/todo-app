@@ -59,21 +59,21 @@ function loadDefaults() {
         updateTasksInfoBox();
     }
 }
-// check if  device is touch
-function isTouchDevice() {
-    const toMatch = [
-        /Android/i,
-        /webOS/i,
-        /iPhone/i,
-        /iPad/i,
-        /iPod/i,
-        /BlackBerry/i,
-        /Windows Phone/i
-    ];
-    return toMatch.some((toMatchItem) => {
-        return navigator.userAgent.match(toMatchItem);
-    });
-}
+// // check if  device is touch
+// function isTouchDevice() {
+//     const toMatch = [
+//         /Android/i,
+//         /webOS/i,
+//         /iPhone/i,
+//         /iPad/i,
+//         /iPod/i,
+//         /BlackBerry/i,
+//         /Windows Phone/i
+//     ];
+//     return toMatch.some((toMatchItem) => {
+//         return navigator.userAgent.match(toMatchItem);
+//     });
+// }
 //#endregion
 //#region Design Functions
 // function to set prefered theme
@@ -181,12 +181,8 @@ function addTasks() {
                 addTasksToLocalStorage(tasks);
                 updateTasksInfoBox();
                 txtAddNewTask.value = "";
-                if (isTouchDevice()) {
-                    dragDropTasks("touch");
-                }
-                else {
-                    dragDropTasks("desktop");
-                }
+                dragDropTasks("touch");
+                dragDropTasks("desktop");
             }
             else {
                 return false;
@@ -317,6 +313,7 @@ function dragHandler(event) {
 // function to handel drop event
 function dropHandler(event) {
     event.preventDefault();
+    selectedItem = event.target;
     selectedItem.classList.remove("drag-sort-active");
     reArrangeTasks();
 }
@@ -329,6 +326,7 @@ function reArrangeTasks() {
             task.querySelector(".task > div > label").innerHTML,
             task.querySelector(".task > div").classList.contains("completed") ? "completed" : "active"));
     });
+    console.log(reArrangedTasks);
     addTasksToLocalStorage(reArrangedTasks);
 }
 // function to re arrange tasks
@@ -348,7 +346,6 @@ function dragDropTasks(device) {
                     // desktop events
                     task.ondrag = dragHandler;
                     task.ondragend = dropHandler;
-                    task.ontouchend = dropHandler;
                 });
                 break;
             default: // default is tocuh screen
@@ -365,14 +362,10 @@ function dragDropTasks(device) {
 //#endregion
 //#region Calls
 loadDefaults();
-if (isTouchDevice()) {
-    dragDropTasks("touch");
-    taskDivTouchEventHandler();
-}
-else {
-    dragDropTasks("desktop");
-    taskDivClickEventHandler();
-}
+dragDropTasks("touch");
+dragDropTasks("desktop");
+taskDivClickEventHandler();
+taskDivTouchEventHandler();
 toggleTheme();
 addTasks();
 clearCompleted();

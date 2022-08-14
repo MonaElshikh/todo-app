@@ -31,10 +31,10 @@ body {
 .to-do-app {
     width: 100vw;
     position: relative;
-    background: url("/images/bg-mobile-light.jpg") no-repeat;
+    background: url("images/bg-mobile-light.jpg") no-repeat;
 }
 .to-do-app.dark {
-    background: url("/images/bg-mobile-dark.jpg") no-repeat;
+    background: url("images/bg-mobile-dark.jpg") no-repeat;
 }
 header {
     position: relative;

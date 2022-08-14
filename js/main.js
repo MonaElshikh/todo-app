@@ -79,10 +79,10 @@ function isTouchDevice() {
 // function to set prefered theme
 function setPreferedThem(themeName) {
     if (themeName == "light") {
-        toggleIcon.src = "/images/icon-moon.svg";
+        toggleIcon.src = "images/icon-moon.svg";
         toDoApp.classList.remove("dark");
     } else {
-        toggleIcon.src = "/images/icon-sun.svg";
+        toggleIcon.src = "images/icon-sun.svg";
         toDoApp.classList.add("dark");
     }
     rootElement.style.setProperty("--container-bg-color", themes[themeName]["--container-bg-color"]);
@@ -95,11 +95,11 @@ function toggleTheme() {
     toggleIcon.addEventListener("click", (e) => {
         if (toggleIcon.dataset.theme == "light") {
             toggleIcon.setAttribute("data-theme", "dark");
-            toggleIcon.src = "/images/icon-sun.svg";
+            toggleIcon.src = "images/icon-sun.svg";
         }
         else {
             toggleIcon.setAttribute("data-theme", "light");
-            toggleIcon.src = "/images/icon-moon.svg";
+            toggleIcon.src = "images/icon-moon.svg";
         }
         localStorage.setItem("theme", toggleIcon.dataset.theme);
         setPreferedThem(toggleIcon.dataset.theme);
@@ -296,7 +296,7 @@ function touchMoveHandler(event) {
         y = event.touches[0].clientY;
     let swapItem = document.elementFromPoint(x, y) === null ? selectedItem : document.elementFromPoint(x, y);
     if (list === swapItem.parentNode) {
-        swapItem = swapItem !== selectedItem.nextSibling ? swapItem : swapItem.nextSibling;
+        // swapItem = swapItem !== selectedItem.nextSibling ? swapItem : swapItem.nextSibling;
         list.insertBefore(selectedItem, swapItem);
     }
 }

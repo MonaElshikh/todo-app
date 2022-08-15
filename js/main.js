@@ -85,7 +85,6 @@ function getTasksFromLocalStorage() {
     let todoList = localStorage.getItem("todo-list")
         ? JSON.parse(localStorage.getItem("todo-list") || "")
         : null;
-    console.log(todoList);
     return todoList;
 }
 function addTasksToPage(tasks) {

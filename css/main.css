@@ -12,7 +12,8 @@
     --VeryLightGrayishBlue: hsl(236, 33%, 92%);
     --LightGrayishBlue: hsl(233, 11%, 84%);
     --DarkGrayishBlue: hsl(236, 9%, 61%);
-    --VeryDarkGrayishBlue: hsl(235, 19%, 35%);
+    --VeryDarkGrayishBlue: hsl(236, 31%, 57%);
+    --add-task-btn:hsl(230, 88%, 73%);
 }
 body {
     font-family: 'Josefin Sans', sans-serif;
@@ -98,6 +99,22 @@ header > img {
     top: 50%;
     transform: translateY(-50%);
     z-index: 2;
+}
+.add-task {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    z-index: 2;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color:var(--add-task-btn);
+    color: white;
+    cursor: pointer;
 }
 .tasks {
     margin-top: 10px;
@@ -218,10 +235,7 @@ font-weight: normal;
 .actions > ul > li > a.active {
 color: var(--active-link);
 }
-.actions > ul > li > a:hover
-{
-    color:var(--VeryDarkGrayishBlue)
-}
+
 p {
     display: none;
     color: var(--DarkGrayishBlue);

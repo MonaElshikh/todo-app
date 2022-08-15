@@ -17,6 +17,7 @@ const txtAddNewTask = document.querySelector("#txtadd");
 const dragParagraph = document.querySelector("p");
 const clearCompletedlink = document.querySelector(".info > a");
 const actionLinks = Array.from(document.querySelectorAll(".actions > ul > li > a"));
+const addTaskBtn = document.querySelector(".add-task");
 let tasks = [];
 let filtteredTasks = [];
 let selectedItem;
@@ -172,21 +173,19 @@ function updateTasksInfoBox() {
     }
 }
 function addTasks() {
-    txtAddNewTask.addEventListener("keyup", (e) => {
-        if (e.keyCode == 13) {
-            if (txtAddNewTask.value) {
-                let task = new Task(Date.now(), txtAddNewTask.value, "active");
-                tasks.push(task);
-                addTasksToPage(tasks);
-                addTasksToLocalStorage(tasks);
-                updateTasksInfoBox();
-                txtAddNewTask.value = "";
-                dragDropTasks("touch");
-                dragDropTasks("desktop");
-            }
-            else {
-                return false;
-            }
+    addTaskBtn.addEventListener("click", () => {
+        if (txtAddNewTask.value) {
+            let task = new Task(Date.now(), txtAddNewTask.value, "active");
+            tasks.push(task);
+            addTasksToPage(tasks);
+            addTasksToLocalStorage(tasks);
+            updateTasksInfoBox();
+            txtAddNewTask.value = "";
+            dragDropTasks("touch");
+            dragDropTasks("desktop");
+        }
+        else {
+            return false;
         }
     });
 }

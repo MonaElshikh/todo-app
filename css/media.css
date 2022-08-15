@@ -26,4 +26,8 @@
     p {
         margin: 30px 0;
     }
+    .actions > ul > li > a:hover
+    {
+        color:var(--VeryDarkGrayishBlue)
+    }
 }

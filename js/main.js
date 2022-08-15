@@ -292,7 +292,7 @@ function touchMoveHandler(event) {
         y = event.touches[0].clientY;
     let swapItem = document.elementFromPoint(x, y) === null ? selectedItem : document.elementFromPoint(x, y);
     if (list === swapItem.parentNode) {
-        // swapItem = swapItem !== selectedItem.nextSibling ? swapItem : swapItem.nextSibling;
+        swapItem = swapItem !== selectedItem.nextSibling ? swapItem : swapItem.nextSibling;
         list.insertBefore(selectedItem, swapItem);
     }
 }

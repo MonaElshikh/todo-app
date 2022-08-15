@@ -1,11 +1,4 @@
-//#region Declaration
-class Task {
-    constructor(id, task, status) {
-        this.id = id;
-        this.task = task;
-        this.status = status;
-    }
-}
+"use strict";
 const rootElement = document.documentElement;
 const toggleIcon = document.querySelector("header > img");
 const toDoApp = document.querySelector(".to-do-app");
@@ -21,29 +14,28 @@ const addTaskBtn = document.querySelector(".add-task");
 let tasks = [];
 let filtteredTasks = [];
 let selectedItem;
-const themes =
-{
-    light:
-    {
+class Task {
+    constructor(id, task, status) {
+        this.id = id;
+        this.task = task;
+        this.status = status;
+    }
+}
+const themes = {
+    light: {
         "--container-bg-color": "hsl(240deg 42% 95%)",
         "--content-bg-color": "hsl(0, 0%, 98%)",
         "--VeryDarkGrayishBlue": "hsl(235, 19%, 35%)",
-        "--VeryLightGrayishBlue": "hsl(236, 33%, 92%)"
+        "--VeryLightGrayishBlue": "hsl(236, 33%, 92%)",
     },
-    dark:
-    {
+    dark: {
         "--container-bg-color": "hsl(240,19%,10%)",
         "--content-bg-color": "hsl(235,24%,19%)",
         "--VeryDarkGrayishBlue": "hsl(231,38%,90%)",
-        "--VeryLightGrayishBlue": "hsl(236,19%,64%)"
-    }
-}
-//#endregion
-//#region Functions
-//#region  General Functions
-// function to load defaults [theme,list of tasks].
+        "--VeryLightGrayishBlue": "hsl(236,19%,64%)",
+    },
+};
 function loadDefaults() {
-    // load default theme
     let preferedTheme = localStorage.getItem("theme");
     if (preferedTheme) {
         toggleIcon.setAttribute("data-theme", preferedTheme);
@@ -52,37 +44,18 @@ function loadDefaults() {
         toggleIcon.setAttribute("data-theme", "light");
     }
     setPreferedThem(toggleIcon.dataset.theme);
-
-    // load tasks
     if (getTasksFromLocalStorage()) {
         tasks = getTasksFromLocalStorage();
         addTasksToPage(tasks);
         updateTasksInfoBox();
     }
 }
-// // check if  device is touch
-// function isTouchDevice() {
-//     const toMatch = [
-//         /Android/i,
-//         /webOS/i,
-//         /iPhone/i,
-//         /iPad/i,
-//         /iPod/i,
-//         /BlackBerry/i,
-//         /Windows Phone/i
-//     ];
-//     return toMatch.some((toMatchItem) => {
-//         return navigator.userAgent.match(toMatchItem);
-//     });
-// }
-//#endregion
-//#region Design Functions
-// function to set prefered theme
 function setPreferedThem(themeName) {
     if (themeName == "light") {
-        toggleIcon.src = "images/icon-moon.svg";
+        toggleIcon ? (toggleIcon.src = "images/icon-moon.svg") : "";
         toDoApp.classList.remove("dark");
-    } else {
+    }
+    else {
         toggleIcon.src = "images/icon-sun.svg";
         toDoApp.classList.add("dark");
     }
@@ -91,9 +64,8 @@ function setPreferedThem(themeName) {
     rootElement.style.setProperty("--VeryDarkGrayishBlue", themes[themeName]["--VeryDarkGrayishBlue"]);
     rootElement.style.setProperty("--VeryLightGrayishBlue", themes[themeName]["--VeryLightGrayishBlue"]);
 }
-// function to toggle themes
 function toggleTheme() {
-    toggleIcon.addEventListener("click", (e) => {
+    toggleIcon.addEventListener("click", () => {
         if (toggleIcon.dataset.theme == "light") {
             toggleIcon.setAttribute("data-theme", "dark");
             toggleIcon.src = "images/icon-sun.svg";
@@ -106,28 +78,26 @@ function toggleTheme() {
         setPreferedThem(toggleIcon.dataset.theme);
     });
 }
-//#endregion
-//#region Functionality Functions
-function addTasksToLocalStorage(_tasks) {
-    localStorage.setItem("todo-list", JSON.stringify(_tasks));
+function addTasksToLocalStorage(tasks) {
+    localStorage.setItem("todo-list", JSON.stringify(tasks));
 }
 function getTasksFromLocalStorage() {
-    return JSON.parse(localStorage.getItem("todo-list"));
+    let todoList = localStorage.getItem("todo-list")
+        ? JSON.parse(localStorage.getItem("todo-list") || "")
+        : null;
+    console.log(todoList);
+    return todoList;
 }
-// function to create task html and add it to dom
 function addTasksToPage(tasks) {
     divTasks.innerHTML = "";
     tasks.forEach((task) => {
-        // task div
         let taskDiv = document.createElement("div");
         taskDiv.className = "task";
-        taskDiv.setAttribute('data-id', task.id);
-        taskDiv.setAttribute("draggable", true);
+        taskDiv.setAttribute("data-id", task.id);
+        taskDiv.setAttribute("draggable", "true");
         taskDiv.style.cursor = "move";
-        // checkbox and label
         let checkDiv = document.createElement("div");
         checkDiv.className = "check-box";
-        // if task is completed add completed calss
         task.status == "completed" ? checkDiv.classList.add("completed") : "";
         let checkInput = document.createElement("input");
         checkInput.setAttribute("type", "checkbox");
@@ -138,8 +108,6 @@ function addTasksToPage(tasks) {
         checkLabel.innerHTML = task.task;
         checkDiv.appendChild(checkInput);
         checkDiv.appendChild(checkLabel);
-
-        // close span and img
         let closeSpan = document.createElement("span");
         closeSpan.className = "close";
         let closeImg = document.createElement("img");
@@ -147,15 +115,12 @@ function addTasksToPage(tasks) {
         closeImg.alt = "close";
         closeImg.setAttribute("id", "close");
         closeSpan.appendChild(closeImg);
-
-        // apped all to task div
         taskDiv.appendChild(checkDiv);
         taskDiv.appendChild(closeSpan);
         divTasks.appendChild(taskDiv);
     });
     updateTasksInfoBox();
 }
-// function to show info and actions boxs if there are tasks.
 function updateTasksInfoBox() {
     if (tasks.length > 0) {
         divTasks.classList.remove("empty");
@@ -183,6 +148,7 @@ function addTasks() {
             txtAddNewTask.value = "";
             dragDropTasks("touch");
             dragDropTasks("desktop");
+            return true;
         }
         else {
             return false;
@@ -197,8 +163,8 @@ function updateTask(e) {
         if (task.id == taskDiv.getAttribute("data-id")) {
             taskDiv.querySelector(".check-box").classList.toggle("completed");
             taskDiv.querySelector(".check-box").classList.contains("completed")
-                ? task.status = "completed"
-                : task.status = "active";
+                ? (task.status = "completed")
+                : (task.status = "active");
         }
     });
 }
@@ -234,13 +200,11 @@ function taskDivTouchEventHandler() {
         dragDropTasks("touch");
     });
 }
-// function to filter tasks according to status.
 function filterTasks() {
     actionLinks.forEach((action) => {
         action.addEventListener("click", () => {
             actionLinks.forEach((link) => link.classList.remove("active"));
             action.classList.add("active");
-            // filter tasks by status
             switch (action.innerHTML.toLowerCase()) {
                 case "all":
                     filtteredTasks = tasks;
@@ -256,12 +220,13 @@ function filterTasks() {
         });
     });
 }
-// function to clear completed tasks
 function clearCompleted() {
     clearCompletedlink.addEventListener("click", (e) => {
         e.preventDefault();
-        if (tasks != undefined && tasks.length > 0 && tasks.filter((task) => task.status == "completed").length > 0) {
-            tasks.forEach(task => {
+        if (tasks != undefined &&
+            tasks.length > 0 &&
+            tasks.filter((task) => task.status == "completed").length > 0) {
+            tasks.forEach((task) => {
                 if (task.status == "completed") {
                     task.status = "active";
                 }
@@ -269,85 +234,84 @@ function clearCompleted() {
             addTasksToLocalStorage(tasks);
             addTasksToPage(tasks);
             updateTasksInfoBox();
+            return true;
         }
         else {
             return false;
         }
     });
 }
-//#region Drag/touch events
-// function to handle touch start event for touch screens
 function touchStartHandler(event) {
     event.preventDefault();
     selectedItem = event.target;
     selectedItem.classList.add("drag-sort-active");
 }
-// function to handle touch move event for touch screens
 function touchMoveHandler(event) {
     event.preventDefault();
-    selectedItem = event.target,
-        list = selectedItem.parentNode,
-        x = event.touches[0].clientX,
-        y = event.touches[0].clientY;
-    let swapItem = document.elementFromPoint(x, y) === null ? selectedItem : document.elementFromPoint(x, y);
+    selectedItem = event.target;
+    let list = selectedItem.parentNode;
+    let x = event.touches[0].clientX;
+    let y = event.touches[0].clientY;
+    let swapItem = document.elementFromPoint(x, y) === null
+        ? selectedItem
+        : document.elementFromPoint(x, y);
     if (list === swapItem.parentNode) {
-        swapItem = swapItem !== selectedItem.nextSibling ? swapItem : swapItem.nextSibling;
+        swapItem =
+            swapItem !== selectedItem.nextSibling ? swapItem : swapItem.nextSibling;
         list.insertBefore(selectedItem, swapItem);
     }
 }
-// function to handel drag on desktop
 function dragHandler(event) {
     event.preventDefault();
-    selectedItem = event.target,
-        list = selectedItem.parentNode,
-        x = event.clientX,
-        y = event.clientY;
+    selectedItem = event.target;
+    let list = selectedItem.parentNode;
+    let x = event.clientX;
+    let y = event.clientY;
     selectedItem.classList.add("drag-sort-active");
-    let swapItem = document.elementFromPoint(x, y) === null ? selectedItem : document.elementFromPoint(x, y);
+    let swapItem = document.elementFromPoint(x, y) === null
+        ? selectedItem
+        : document.elementFromPoint(x, y);
     if (list === swapItem.parentNode) {
-        swapItem = swapItem !== selectedItem.nextSibling ? swapItem : swapItem.nextSibling;
+        swapItem =
+            swapItem !== selectedItem.nextSibling ? swapItem : swapItem.nextSibling;
         list.insertBefore(selectedItem, swapItem);
     }
 }
-// function to handel drop event
 function dropHandler(event) {
     event.preventDefault();
     selectedItem = event.target;
     selectedItem.classList.remove("drag-sort-active");
     reArrangeTasks();
 }
-// function to re arrange tasks after drag and drop.
 function reArrangeTasks() {
     const tasksDivs = Array.from(document.querySelectorAll(".task"));
     let reArrangedTasks = [];
     tasksDivs.forEach((task) => {
-        reArrangedTasks.push(new Task(task.dataset.id,
-            task.querySelector(".task > div > label").innerHTML,
-            task.querySelector(".task > div").classList.contains("completed") ? "completed" : "active"));
+        reArrangedTasks.push(new Task(task.dataset.id, task.querySelector(".task > div > label").innerHTML, task.querySelector(".task > div").classList.contains("completed")
+            ? "completed"
+            : "active"));
     });
     console.log(reArrangedTasks);
     addTasksToLocalStorage(reArrangedTasks);
 }
-// function to re arrange tasks
 function dragDropTasks(device) {
     const tasksDivs = document.querySelectorAll(".task");
     if (tasksDivs.length > 0) {
         switch (device) {
-            case "touch":  // touch screen events
+            case "touch":
                 tasksDivs.forEach((task) => {
                     task.ontouchstart = touchStartHandler;
                     task.ontouchmove = touchMoveHandler;
                     task.ontouchend = dropHandler;
                 });
                 break;
-            case "desktop": // desktop events
+            case "desktop":
                 tasksDivs.forEach((task) => {
-                    // desktop events
                     task.ondrag = dragHandler;
                     task.ondragend = dropHandler;
                 });
                 break;
-            default: // default is tocuh screen
+            default:
                 tasksDivs.forEach((task) => {
                     task.ontouchstart = touchStartHandler;
                     task.ontouchmove = touchMoveHandler;
@@ -357,9 +321,6 @@ function dragDropTasks(device) {
         }
     }
 }
-//#endregion
-//#endregion
-//#region Calls
 loadDefaults();
 dragDropTasks("touch");
 dragDropTasks("desktop");
@@ -369,5 +330,4 @@ toggleTheme();
 addTasks();
 clearCompleted();
 filterTasks();
-//#endregion
-
+//# sourceMappingURL=main.js.map

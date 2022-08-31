@@ -1,5 +1,20 @@
 # Frontend Mentor - Todo app solution
 
+This is a solution to the [Todo app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
+
+## Table of contents
+
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+- [Author](#author)
+- [Acknowledgments](#acknowledgments)
+
+## Overview
+
 ### The challenge
 
 Users should be able to:
@@ -14,14 +29,35 @@ Users should be able to:
 - Toggle light and dark mode
 - **Bonus**: Drag and drop to reorder items on the list
 
+### Screenshot
+
+![](./screenshots/mobile.png)
+![](./screenshots/mobile-dark.png)
+
+![](./screenshots/desktop.png)
+![](./screenshots/desktop-dark.png)
+
+
+### Links
+
+- Solution URL: [https://github.com/MonaElshikh/todo-app]
+- Live Site URL: [https://monaelshikh.github.io/todo-app/]
+
+## My process
+
 ### Built with
 
 - Semantic HTML5 markup
 - CSS custom properties
 - Flexbox
+- CSS Grid
 - Typescript
-- javascript
+- Mobile-first workflow
+
+## Author
+
+- Frontend Mentor - [@MonaElshikh](https://www.frontendmentor.io/profile/MonaElshikh)
 
 ## Acknowledgments
 
-Thanks a lot Frontendmentor for your support :)
+Thanks a lot frontendmentor for your support :)

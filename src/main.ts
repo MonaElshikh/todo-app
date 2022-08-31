@@ -258,18 +258,14 @@ function filterTasks() {
 }
 // function to clear completed tasks
 function clearCompleted() {
-  clearCompletedlink.addEventListener("click", (e) => {
+  clearCompletedlink.addEventListener("click", (e: any) => {
     e.preventDefault();
     if (
       tasks != undefined &&
       tasks.length > 0 &&
-      tasks.filter((task) => task.status == "completed").length > 0
+      tasks.filter((task: any) => task.status == "completed").length > 0
     ) {
-      tasks.forEach((task) => {
-        if (task.status == "completed") {
-          task.status = "active";
-        }
-      });
+      tasks = tasks.filter((task) => task.status != "completed");
       addTasksToLocalStorage(tasks);
       addTasksToPage(tasks);
       updateTasksInfoBox();

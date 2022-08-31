@@ -17,6 +17,11 @@ This is a solution to the [Todo app challenge on Frontend Mentor](https://www.fr
 
 ### The challenge
 
+The designs were created to the following widths:
+
+- Mobile: 375px
+- Desktop: 1440px
+
 Users should be able to:
 
 - View the optimal layout for the app depending on their device's screen size
@@ -36,7 +41,6 @@ Users should be able to:
 
 ![](./screenshots/desktop.png)
 ![](./screenshots/desktop-dark.png)
-
 
 ### Links
 
